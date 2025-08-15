@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "esnext", // Or a specific ES version like "es2019"
+    "module": "esnext", // Important for ESM output
+    "moduleResolution": "bundler",
+    "declaration": true, // Optional: Generate declaration files
+    "outDir": "./dist", // Output directory for compiled files
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"] // Or your source file location
+}
