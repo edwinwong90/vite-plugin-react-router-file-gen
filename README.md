@@ -2,9 +2,6 @@
 # vite-plugin-react-router-file-gen
 React Router (Declarative Mode) file based routing. It support **Preact** too!!
 
-## Goal
-
-
 ## Installation
 ```bash
 npm install vite-plugin-react-router-file-gen

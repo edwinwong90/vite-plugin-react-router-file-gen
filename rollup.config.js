@@ -1,4 +1,5 @@
 import typescript from '@rollup/plugin-typescript';
+import copy from 'rollup-plugin-copy';
 
 export default {
   input: 'src/index.ts',
@@ -8,7 +9,12 @@ export default {
     sourcemap: true
   },
   plugins: [
-    typescript()
+    typescript(),
+    copy({
+      targets: [
+        { src: 'README.md', dest: 'dist' }
+      ]
+    })
   ],
   external: ['fs', 'path', 'vite']
 };
