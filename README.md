@@ -9,7 +9,7 @@ npm install vite-plugin-react-router-file-gen
 
 ## Usage
 In `vite.config.ts` 
-```
+```ts
 import reactRouterFileGen from 'vite-plugin-react-router-file-gen'
 
 // https://vite.dev/config/
