@@ -2,9 +2,13 @@
 # vite-plugin-react-router-file-gen
 React Router (Declarative Mode) file based routing. It support **Preact** too!!
 
+## Prerequisite
+- Vite v6 and above
+- React Router v7
+
 ## Installation
 ```bash
-npm install vite-plugin-react-router-file-gen
+npm install --save-dev vite-plugin-react-router-file-gen
 ```
 
 ## Usage
