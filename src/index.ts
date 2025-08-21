@@ -7,7 +7,7 @@ interface PagesTreeOptions {
 }
 
 type DirNode = {
-  segment: string;
+  segment: string;            // "" if root/group
   layout?: string;
   index?: string;
   notFound?: string;
@@ -27,13 +27,11 @@ export default function reactRouterGen(userOptions: PagesTreeOptions = {}) {
 
   const write = () => {
     if (!fs.existsSync(absPages)) {
-      // pages folder missing → skip generation
       return;
     }
     const tree = scanDir(absPages, absPages, '');
 
     if (isTreeEmpty(tree)) {
-      // tree has no routes/layout/index/not-found → skip generation
       return;
     }
 
@@ -62,7 +60,9 @@ export default function reactRouterGen(userOptions: PagesTreeOptions = {}) {
 }
 
 function toSegment(name: string) {
-  return /^\[.+\]$/.test(name) ? `:${name.slice(1, -1)}` : name;
+  if (/^\[.+\]$/.test(name)) return `:${name.slice(1, -1)}`;
+  if (/^\(.*\)$/.test(name)) return ''; // group folder
+  return name;
 }
 
 function stripExt(filePath: string) {
@@ -146,6 +146,33 @@ function generateRoutesTree(root: DirNode, outputFile: string, pagesRoot: string
 
     for (const child of n.children) {
       const childInner = renderInner(child);
+
+      if (child.segment === '') {
+        // group folder
+        if (child.layout) {
+          const L = imp(child.layout);
+          parts.push(
+            `<Route element={<${L} />}>
+${indent(childInner, 4)}
+</Route>`
+          );
+        } else if (childInner.trim()) {
+          needsOutlet = true;
+          parts.push(
+            `<Route element={<Outlet />}>
+${indent(childInner, 4)}
+</Route>`
+          );
+        }
+
+        if (child.notFound) {
+          const NF = imp(child.notFound);
+          parts.push(`<Route path="*" element={<${NF} />} />`);
+        }
+        continue;
+      }
+
+      // normal folder
       if (child.layout) {
         const L = imp(child.layout);
         parts.push(
@@ -168,7 +195,7 @@ ${indent(childInner, 4)}
       parts.push(`<Route path="*" element={<${NF} />} />`);
     }
 
-    return parts.join('\n');
+    return parts.filter(Boolean).join('\n');
   };
 
   const inner = renderInner(root);

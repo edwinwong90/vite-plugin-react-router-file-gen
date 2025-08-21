@@ -29,6 +29,9 @@ function Index() {
         <NavLink to="/post/123/comments">
           <button>/post/:id/comments</button>
         </NavLink>
+        <NavLink to="/post/123/not-valid-url">
+          <button>post not found page</button>
+        </NavLink>
         <NavLink to="/invalid-url">
           <button>not found page!!</button>
         </NavLink>
