@@ -37,5 +37,9 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edwinwong90/vite-plugin-react-router-file-gen"
   }
 }

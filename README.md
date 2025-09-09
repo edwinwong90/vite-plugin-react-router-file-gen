@@ -1,6 +1,12 @@
 
 # vite-plugin-react-router-file-gen
-React Router (Declarative Mode) file based routing. It support **Preact** too!!
+React Router (Declarative Mode) file based routing. **Preact** compatible!!
+
+## Features
+- Support Layout
+- Support Grouping (Pathless)
+- Support not found route file
+- Support params 
 
 ## Prerequisite
 - Vite v6 and above
@@ -69,3 +75,5 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 )
 ```
+
+See more [example](https://github.com/edwinwong90/vite-plugin-react-router-file-gen/tree/main/examples/vite-react)
